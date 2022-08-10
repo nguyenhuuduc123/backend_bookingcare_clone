@@ -48,11 +48,27 @@ let putCRUD =  async (req,res) => {
   return res.render('displayCRUD',{dataTable : allUser})
     
 }
+
+
+let deleteCRUD = async (req,res) => {
+    let id = req.query.id;
+    if(id){
+        await CRUDServices.deleteUserbyId(id);
+        return res.send('delete user succed')
+    }
+  else {
+    return res.send('not found')
+  }
+
+
+
+}
 module.exports = {
     getHomePage,
     getCRUD,
     postCrud,
     displayGetCrud,
     getEditCRUD,
-    putCRUD
+    putCRUD,
+    deleteCRUD
 }
