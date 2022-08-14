@@ -15,6 +15,37 @@ let handleLogin = async (req,res) => {
              user : userData.user ? userData.user : {}
         })
 }
+
+
+
+let handleGetAllUser =async (req, res) => {
+    let id = req.query.id ; //all , id
+        let users  = await Services.getAllUsers(id);
+        console.log(users)
+        return res.status(200).json({
+            errCode : 0,
+            errMessage : 'ok',
+            users
+        })
+}
+let handleCreateNewUser = async (req,res)=> {
+        try{
+            let user  = req.body;
+       let message  = await Services.createNewUser(user);
+       console.log(message);
+       return res.status(200).json({
+        message : message
+       });
+            
+        }
+        catch(err){
+            console.log(e)
+        }
+}
+
+
 module.exports = {
-    handleLogin
+    handleLogin,
+    handleGetAllUser,
+    handleCreateNewUser
 }
